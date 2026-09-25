@@ -1,10 +1,9 @@
-name: Build InstallmentPro Premium
+name: Build
  
 on:
 push:
 branches:
 - main
- 
 workflow_dispatch:
  
 jobs:
@@ -12,26 +11,16 @@ build:
 runs-on: windows-latest
  
 steps:
-- name: Checkout Repository
-uses: actions/checkout@v4
+- uses: actions/checkout@v4
  
-- name: Setup Python
-uses: actions/setup-python@v5
+- uses: actions/setup-python@v5
 with:
 python-version: "3.12"
  
-- name: Install Dependencies
+- name: Install dependencies
 run: |
 python -m pip install --upgrade pip
-pip install -r requirements.txt
-pip install pyinstaller
  
-- name: Build EXE
+- name: Test
 run: |
-pyinstaller --onefile --noconsole --name InstallmentPro_Premium app.py
- 
-- name: Upload EXE
-uses: actions/upload-artifact@v4
-with:
-name: InstallmentPro_Premium
-path: dist/*
+python --version
